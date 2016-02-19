@@ -15,9 +15,9 @@
 //     return view('welcome');
 // });
 
-Route::get('/', 'InicioController@inicio');
-Route::get('check', 'CheckController@index');
-Route::get('checkinout', 'InicioController@guardarUsuario');
+Route::get('/', 'HomeController@index');
+Route::get('checks/{id}', 'CheckController@show');
+Route::get('checkinout', 'HomeController@guardarUsuario');
 
 /*
 |--------------------------------------------------------------------------

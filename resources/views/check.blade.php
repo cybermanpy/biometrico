@@ -1,5 +1,11 @@
 @extends('layouts.default')
 
 @section('content')
-	<h1>Check</h1>
+	
+	<ul>
+		
+		<li> {{ $checks->userid }} - {{ $checks->user->name }} </li>
+		
+	</ul>
+
 @stop

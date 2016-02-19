@@ -2,16 +2,17 @@
 
 namespace biometrico\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use biometrico\Http\Requests;
+use biometrico\Userinfo;
+use biometrico\Checkinout;
 
 class CheckController extends Controller
 {
     
-    public function index()
+    public function show($id)
     {
 
-    	return view('check');
+    	$checks = Checkinout::findOrFail($id);
+
+		return view('check', ['checks' => $checks ]);
     }
 }
