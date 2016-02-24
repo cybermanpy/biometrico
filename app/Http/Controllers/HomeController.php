@@ -10,13 +10,11 @@ class HomeController extends Controller
 
 	public function index()
 	{
-		$checks = Checkinout::All();
+		$users = Userinfo::All();
 
-		return view('home', ['checks' => $checks ]);
+
+		return view('home', ['users' => $users ]);
 	}
 
-	public function guardarUsuario()
-	{
-		//
-	}
+
 }

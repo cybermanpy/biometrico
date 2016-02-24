@@ -16,8 +16,33 @@
 // });
 
 Route::get('/', 'HomeController@index');
-Route::get('checks/{id}', 'CheckController@show');
-Route::get('checkinout', 'HomeController@guardarUsuario');
+
+Route::get('checks/{id}', [
+
+	'uses' => 'CheckController@show', 
+
+	'as' => 'check_show_path'
+
+	]);
+
+Route::get('formcheck', [
+
+	'uses' => 'CheckController@formCheck',
+
+	'as' => 'form_show_path',
+
+]);
+
+Route::post('formcheck', [
+
+	'uses' => 'CheckController@store',
+
+	'as' => 'form_store_path',
+]);
+
+
+// Route::get('checks/{id}', 'CheckController@show');
+// Route::get('checkinout', 'HomeController@guardarUsuario');
 
 /*
 |--------------------------------------------------------------------------

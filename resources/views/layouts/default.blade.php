@@ -7,9 +7,19 @@
 	@yield('css')
 
 </head>
+
+<style type="text/css">
+	.content
+	{
+		margin: 0 auto;
+	}
+</style>
+
 <body>
-	
-	@yield('content')
+	<div class="content" >
+		
+		@yield('content')
+	</div>
 
 	@yield('js')
 
