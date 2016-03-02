@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form action=" {{ route('form_store_path') }} " method="post">
+<form action=" {{ route('formcheck_store_path') }} " method="post">
 	{{ csrf_field() }}
 	Cedula:
 	<input type="text" name="id">

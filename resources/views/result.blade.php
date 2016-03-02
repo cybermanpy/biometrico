@@ -4,14 +4,14 @@
 
 	<table border="1">
 		<tr>
-			<th colspan="4"> {{ $user->name }} </th>
+			<th colspan="3"> {{ $name }} </th>
 		</tr>
 		<tr>
 			<th> Fecha </th>
 			<th> Entrada </th>
 			<th> Salida </th>
 		</tr>
-			@foreach ($list_check as $check)
+			@foreach ($list_check as $key => $check)
 				<tr>
 					<td>{{ $dias[date('w', strtotime($check->checktime))] }} 
 						{{ date('d', strtotime($check->checktime)) }} de 
@@ -30,7 +30,6 @@
 					</td>
 				</tr>
 			@endforeach
-
 	</table>
 
 @stop

@@ -21,12 +21,16 @@ class CheckController extends Controller
 
     public function show($id)
     {
-    	// $users = Userinfo::findOrFail($id);
-        $users = Userinfo::findOrFail($id);
 
-        $list = $users->checks->sortby('checktime');
+        $dias = $this->getDays();
 
-        return view('check', ['users' => $users, 'list' => $list]);
+        $meses = $this->getMonths();
+
+        $user = Userinfo::findOrFail($id);
+
+        $list_check = $user->checks->sortByDesc('checktime');
+
+        return view('check', ['user' => $user, 'list_check' => $list_check, 'dias' => $dias, 'meses' => $meses]);
     }
 
 
@@ -35,17 +39,37 @@ class CheckController extends Controller
         return view('formcheck');
     }
 
+    public function getDays()
+    {
+
+        $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+        return $dias;
+    }
+
+    public function getMonths()
+    {
+
+        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+        return $meses;
+    }
+
     public function store(Request $request)
     {
-        $id = $request->only(['id']);
+    
+        $dias = $this->getDays();
 
-        $users = Userinfo::findOrFail($id);
+        $meses = $this->getMonths();
 
-        // dd($users);
+        $user = Userinfo::where('ssn', '=', $request->only(['id']))->get();
 
-        // $list = $users->checks->sortby('checktime');
+        foreach($user as $item){
+            $name = $item->name;
+            $a = $item->checks;
+        }
 
-        return view('check', ['users' => $users]);
+        $list_check = $a->sortByDesc('checktime');
+
+        return view('result', ['list_check' => $list_check, 'dias' => $dias, 'meses' => $meses, 'name' => $name ]);
 
     }
 

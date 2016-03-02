@@ -8,6 +8,8 @@ class Checkinout extends Model
 {
     protected $table = "checkinout";
 
+    // protected $primaryKey  = ['userid', 'checktime'];
+
     protected $primaryKey  = "userid";
 
     public function user()

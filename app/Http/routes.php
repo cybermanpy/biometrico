@@ -17,7 +17,7 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('checks/{id}', [
+Route::get('marcacion/{id}', [
 
 	'uses' => 'CheckController@show', 
 
@@ -29,7 +29,7 @@ Route::get('formcheck', [
 
 	'uses' => 'CheckController@formCheck',
 
-	'as' => 'form_show_path',
+	'as' => 'formcheck_show_path',
 
 ]);
 
@@ -37,7 +37,7 @@ Route::post('formcheck', [
 
 	'uses' => 'CheckController@store',
 
-	'as' => 'form_store_path',
+	'as' => 'formcheck_store_path',
 ]);
 
 
