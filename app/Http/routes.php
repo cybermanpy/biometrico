@@ -41,6 +41,22 @@ Route::post('formcheck', [
 ]);
 
 
+Route::get('form', [
+
+	'uses' => 'CheckController@formCheck1',
+
+	'as' => 'form_show_path',
+
+]);
+
+Route::post('form', [
+
+	'uses' => 'CheckController@store1',
+
+	'as' => 'form_store_path',
+]);
+
+
 // Route::get('checks/{id}', 'CheckController@show');
 // Route::get('checkinout', 'HomeController@guardarUsuario');
 

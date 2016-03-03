@@ -39,6 +39,11 @@ class CheckController extends Controller
         return view('formcheck');
     }
 
+    public function formCheck1()
+    {
+        return view('form');
+    }
+
     public function getDays()
     {
 
@@ -69,8 +74,45 @@ class CheckController extends Controller
 
         $list_check = $a->sortByDesc('checktime');
 
+        dd($list_check);
+
         return view('result', ['list_check' => $list_check, 'dias' => $dias, 'meses' => $meses, 'name' => $name ]);
 
     }
 
+    public function store1(Request $request)
+    {
+    
+        $dias = $this->getDays();
+
+        $meses = $this->getMonths();
+
+        $user = Userinfo::where('ssn', '=', $request->only(['id']))->get();
+
+        $marcacion = array();
+
+        foreach($user as $item){
+            $name = $item->name;
+            $a = $item->checks;
+        }
+
+        foreach ($a as $check) {
+
+            if (date('H:I:S', strtotime($check->checktime)) <= '09:00:00')
+            {
+                $marcacion['entrada'][] = $check->checktime ;
+            }
+
+            if (date('H:I:S', strtotime($check->checktime)) >= '15:00:00')
+            {
+                $marcacion['salida'][] = $check->checktime ;
+            }
+
+        }
+
+        $collection = Collection::make($marcacion);
+
+        return view('result1', ['collection' => $collection, 'dias' => $dias, 'meses' => $meses]);
+
+    }
 }
