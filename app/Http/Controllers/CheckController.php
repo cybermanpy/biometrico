@@ -74,8 +74,6 @@ class CheckController extends Controller
 
         $list_check = $a->sortByDesc('checktime');
 
-        dd($list_check);
-
         return view('result', ['list_check' => $list_check, 'dias' => $dias, 'meses' => $meses, 'name' => $name ]);
 
     }

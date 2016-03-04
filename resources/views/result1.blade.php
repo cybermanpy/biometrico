@@ -3,7 +3,7 @@
 @section('content')
 
 	<table border="1">
-			
+
 		@foreach ($collection as $key => $items)
 		<tr>
 			<td> {{ $key }} </td>
