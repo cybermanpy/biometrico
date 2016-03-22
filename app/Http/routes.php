@@ -15,17 +15,7 @@
 //     return view('welcome');
 // });
 
-Route::get('/', 'HomeController@index');
-
-Route::get('marcacion/{id}', [
-
-	'uses' => 'CheckController@show', 
-
-	'as' => 'check_show_path'
-
-	]);
-
-Route::get('formcheck', [
+Route::get('/', [
 
 	'uses' => 'CheckController@formCheck',
 
@@ -33,12 +23,44 @@ Route::get('formcheck', [
 
 ]);
 
-Route::post('formcheck', [
+Route::get('list', [
+
+	'uses' => 'HomeController@index',
+
+	'as' => 'home_show_path',
+
+]);
+
+Route::get('marcacion/{id}', [
+
+	'uses' => 'CheckController@show', 
+
+	'as' => 'check_show_path'
+
+]);
+
+// Route::get('formcheck', [
+
+// 	'uses' => 'CheckController@formCheck',
+
+// 	'as' => 'formcheck_show_path',
+
+// ]);
+
+
+Route::post('/', [
 
 	'uses' => 'CheckController@store',
 
 	'as' => 'formcheck_store_path',
 ]);
+
+// Route::post('formcheck', [
+
+// 	'uses' => 'CheckController@store',
+
+// 	'as' => 'formcheck_store_path',
+// ]);
 
 
 Route::get('form', [

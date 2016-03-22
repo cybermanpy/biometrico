@@ -24,7 +24,7 @@
 						@endif
 					</td>
 					<td>
-						@if (date('H:I:S', strtotime($check->checktime)) >= '15:00:00')
+						@if (date('H:I:S', strtotime($check->checktime)) >= '14:00:00')
 							{{ date('G:ia', strtotime($check->checktime)) }}
 						@endif
 					</td>
