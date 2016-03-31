@@ -5,8 +5,10 @@
 <form action=" {{ route('form_store_path') }} " method="post">
 	{{ csrf_field() }}
 	Cedula:
-	<input type="text" name="id">
+	<input class="bases_buscador" type="text" name="id">
+	<p>
 	<input type="submit" value="Consultar">
+	</p>
 </form>
 
 @stop

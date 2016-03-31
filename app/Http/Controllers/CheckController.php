@@ -36,7 +36,8 @@ class CheckController extends Controller
 
     public function formCheck()
     {
-        return view('formcheck');
+        $meses = $this->getMonths();
+        return view('formcheck', ['meses' => $meses]);
     }
 
     public function formCheck1()
@@ -58,21 +59,52 @@ class CheckController extends Controller
         return $meses;
     }
 
+    public function getDate($value,$a)
+    {
+        if( $value == "Enero")
+        {
+            return $list_check = $a->filter(function ($item, $mes){
+                return $item->checktime > "2016-01-01 06:00:00" && $item->checktime < "2016-02-01 06:00:00";
+            })->sortByDesc('checktime');
+
+        }
+
+        if( $value == "Febrero")
+        {
+            return $list_check = $a->filter(function ($item, $mes){
+                return $item->checktime > "2016-02-01 06:00:00" && $item->checktime < "2016-03-01 06:00:00";
+            })->sortByDesc('checktime');
+
+        }
+
+        if( $value == "Marzo")
+        {
+            return $list_check = $a->filter(function ($item, $mes){
+                return $item->checktime > "2016-03-01 06:00:00" && $item->checktime < "2016-04-01 06:00:00";
+            })->sortByDesc('checktime');
+
+        }
+       
+    }
+
     public function store(Request $request)
     {
+
+        $data = $request->all();
     
         $dias = $this->getDays();
 
         $meses = $this->getMonths();
 
-        $user = Userinfo::where('ssn', '=', $request->only(['id']))->get();
+        $user = Userinfo::where('ssn', '=', $data['id'])->get();
 
-        foreach($user as $item){
-            $name = $item->name;
-            $a = $item->checks;
+        foreach($user as $item)
+        {
+                $name = $item->name;
+                $a = $item->checks;
         }
 
-        $list_check = $a->sortByDesc('checktime');
+        $list_check = $this->getDate($data['month'], $a);
 
         return view('result', ['list_check' => $list_check, 'dias' => $dias, 'meses' => $meses, 'name' => $name ]);
 
@@ -89,12 +121,14 @@ class CheckController extends Controller
 
         $marcacion = array();
 
-        foreach($user as $item){
+        foreach($user as $item)
+        {
             $name = $item->name;
             $a = $item->checks;
         }
 
-        foreach ($a as $check) {
+        foreach ($a as $check)
+        {
 
             if (date('H:I:S', strtotime($check->checktime)) <= '09:00:00')
             {

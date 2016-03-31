@@ -30,7 +30,7 @@
         </div>
 		<div class="cabecera_general">
         	<div class="logo">
-                <a href="{{ route('formcheck_show_path') }}"><img src="{{ asset ('img/logo400X108.png') }}" alt="Portal Paraguay" /></a>
+                <a href="{{ route('formcheck_show_path') }}"><img src="{{ asset ('img/logo400x108.png') }}" alt="Portal Paraguay" /></a>
             </div>
             <div class="logo2">
                 <img src="img/gobierno.png" alt="Gobierno Nacional Paraguay" />
@@ -115,7 +115,7 @@
                 
                     <!-- Terminos claves -->
                     <div class="columna-uno-tres">
-                    	<h5>Servicios por términos claves</h5>
+                    	<h5>Consultar Asistencia</h5>
                         <div class="solo_base margen_no">
                         	@yield('content')
                         </div>
