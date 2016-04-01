@@ -59,33 +59,33 @@ class CheckController extends Controller
         return $meses;
     }
 
-    public function getDate($value,$a)
-    {
-        if( $value == "Enero")
-        {
-            return $list_check = $a->filter(function ($item, $mes){
-                return $item->checktime > "2016-01-01 06:00:00" && $item->checktime < "2016-02-01 06:00:00";
-            })->sortByDesc('checktime');
+    // public function getDate($value,$a)
+    // {
+    //     if( $value == "Enero")
+    //     {
+    //         return $list_check = $a->filter(function ($item, $mes){
+    //             return $item->checktime > "2016-01-01 06:00:00" && $item->checktime < "2016-02-01 06:00:00";
+    //         })->sortByDesc('checktime');
 
-        }
+    //     }
 
-        if( $value == "Febrero")
-        {
-            return $list_check = $a->filter(function ($item, $mes){
-                return $item->checktime > "2016-02-01 06:00:00" && $item->checktime < "2016-03-01 06:00:00";
-            })->sortByDesc('checktime');
+    //     if( $value == "Febrero")
+    //     {
+    //         return $list_check = $a->filter(function ($item, $mes){
+    //             return $item->checktime > "2016-02-01 06:00:00" && $item->checktime < "2016-03-01 06:00:00";
+    //         })->sortByDesc('checktime');
 
-        }
+    //     }
 
-        if( $value == "Marzo")
-        {
-            return $list_check = $a->filter(function ($item, $mes){
-                return $item->checktime > "2016-03-01 06:00:00" && $item->checktime < "2016-04-01 06:00:00";
-            })->sortByDesc('checktime');
+    //     if( $value == "Marzo")
+    //     {
+    //         return $list_check = $a->filter(function ($item, $mes){
+    //             return $item->checktime > "2016-03-01 06:00:00" && $item->checktime < "2016-04-01 06:00:00";
+    //         })->sortByDesc('checktime');
 
-        }
+    //     }
        
-    }
+    // }
 
     public function store(Request $request)
     {
@@ -104,9 +104,32 @@ class CheckController extends Controller
                 $a = $item->checks;
         }
 
-        $list_check = $this->getDate($data['month'], $a);
+        $n = collect([]);
 
-        return view('result', ['list_check' => $list_check, 'dias' => $dias, 'meses' => $meses, 'name' => $name ]);
+        $s = array();
+
+        foreach ($a as $key => $value)
+        {
+            if($key == 0)
+            {
+                $s[]['Entrada'] = $value->checktime;
+            }
+
+            if ($meses[date('n', strtotime($value->checktime))-1] == $data['month'])
+            {
+                $n->push($value->checktime)->groupBy($value->checktime);
+            }
+        }
+
+        // dd($s);
+
+        // $list_check = $this->getDate($data['month'], $a);
+
+        // $list_check = $n->sortByDesc('key');
+
+        $list_check = $a->sortByDesc('checktime');
+
+        return view('result', ['list_check' => $list_check, 'dias' => $dias, 'meses' => $meses, 'name' => $name, 'n' => $n ]);
 
     }
 
